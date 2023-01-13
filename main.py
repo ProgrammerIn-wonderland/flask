@@ -1,6 +1,7 @@
 import flask
 import time
 import json
+import os
 
 # Initialize
 jsoncache = {}
@@ -11,6 +12,7 @@ try:
     filedb = open("jsondb.json", 'r+') 
 except:
     filedb = open("jsondb.json", "x")
+    filedb.write("{}")
 
 jsoncache = json.load(filedb)
 
@@ -67,7 +69,7 @@ def api():
 @app.route('/')
 def index():
     return flask.render_template("index.htm")
-app.run(host='0.0.0.0', port=105)
+app.run(host='0.0.0.0', port=os.getenv("PORT"))
 
 
 
